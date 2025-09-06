@@ -1,0 +1,29 @@
+{
+  "name": "spotify-server",
+  "version": "1.0.0",
+  "description": "A RESTful API for a music streaming platform similar to Spotify, built with Express, MongoDB, JWT, and Cloudinary.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "Dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poopscooper4/spotify-server.git"
+  },
+  "keywords": [],
+  "author": "Poopscooper4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Poopscooper4/spotify-server/issues"
+  },
+  "homepage": "https://github.com/Poopscooper4/spotify-server#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  }
+}
