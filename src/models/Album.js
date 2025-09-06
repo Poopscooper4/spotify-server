@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const albumeSchema = new mongoose.Schema({
   title: {
     type: String,
-    require: [true, "please provide a title"],
+    required: [true, "please provide a title"],
     trim: true,
     maxlength: [40, "title should not be more than 40 characters"],
     minlength: [3, "title should be at least 3 characters"],
@@ -51,3 +51,9 @@ const albumeSchema = new mongoose.Schema({
     default : false,
   }
 });
+
+
+// Compile model from schema
+// 02.Compile model.md
+const Album = mongoose.model("Album", albumSchema);
+module.exports = Album;
