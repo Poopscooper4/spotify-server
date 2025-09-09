@@ -55,9 +55,31 @@ const userSchema = new mongoose.Schema(
         ref: "Playlist",
       },
     ],
+
   },
   { timestamps: true }
 );
+
+//2 main type of middleware
+//post midddleware runs after an event
+//pre middleware runs before an event
+
+//hash password before saving user to db
+
+userSchema.pre("save", async function (next) {
+  console.log("pre middleeware  -  before saving user to db", this);
+
+  //only hash the password if it has been moddified or is new
+  if (!this.isModified("password")) {
+    return next();
+  }
+
+  //hash password
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
 // compile model and export
 
