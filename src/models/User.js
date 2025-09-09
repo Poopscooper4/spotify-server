@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // Schema definition for User
 
-const userSchema = new monguose.Schema(
+const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -59,8 +59,7 @@ const userSchema = new monguose.Schema(
   { timestamps: true }
 );
 
-
 // compile model and export
 
-const User = mongoose.modell("User" , userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = User;

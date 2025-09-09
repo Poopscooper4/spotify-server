@@ -1,6 +1,7 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const userRouter = require("./routes/userRoutes");
+const connectedDB = require("./config/dbConnect");
 
 //load env variables
 
@@ -9,15 +10,22 @@ dotenv.config();
 //initialize express app
 
 const app = express();
-
-
-//connevct to database
-
-mongoose.connect(process.env.MONGO_URL).then(() => console.log("MongoDB CONNECTION SUCCESSFUL!"))
-
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`SERVER IS RUNNING ON PORT:${PORT}`);
-} )
+//Middleware to parse JSON requests
+app.use(express.json());
 
+//Routes  
+
+
+// middleware for user routes
+app.use("/api/users", userRouter);
+
+const startServer = async () => {
+  await connectedDB();
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+};
+
+startServer();
