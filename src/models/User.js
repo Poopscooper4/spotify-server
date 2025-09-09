@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 // Schema definition for User
 
@@ -55,10 +56,15 @@ const userSchema = new mongoose.Schema(
         ref: "Playlist",
       },
     ],
-
   },
   { timestamps: true }
 );
+
+// method to compare password to hashed password
+//              COSTUMER FUNCTION
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 
 //2 main type of middleware
 //post midddleware runs after an event
