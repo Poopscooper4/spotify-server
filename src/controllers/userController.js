@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { StatusCodes } = require("http-status-codes");
 const User = require("../models/User");
 const userRouter = require("../routes/userRoutes");
+const generateToken = require("../utils/generateToken");
 
 // @desc - Register a new user
 // @route - POST /api/users/register
@@ -59,7 +60,7 @@ const loginUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       profilePicture: user.profilePicture,
-      token: "token HERE",
+      token: generateToken(user._id),
     });
   } else {
     res.status(StatusCodes.UNAUTHORIZED);
@@ -67,4 +68,13 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerUser, loginUser };
+
+// get user profile
+
+const getUserProfile = asyncHandler(async (req, res) => {
+  console.log("test", req.user);
+})
+
+
+
+module.exports = { registerUser, loginUser ,getUserProfile };
